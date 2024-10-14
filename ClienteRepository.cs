@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TesteBrPartners.Application.Interfaces;
 using TesteBrPartners.Domain.Entities;
-using TesteBrPartners.Infrastructure.Data;
+using TesteBrPartners.Infra.Data;
 
-namespace TesteBrPartners.Infrastructure.Repositories
+namespace TesteBrPartners.Infra.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
@@ -14,35 +15,35 @@ namespace TesteBrPartners.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Cliente>> GetAllAsync()
+        public IEnumerable<Cliente> GetAll()
         {
-            return await _context.Clientes.Include(c => c.Enderecos).ToListAsync();
+            return _context.Clientes.ToList();
         }
 
-        public async Task<Cliente> GetByIdAsync(int id)
+        public Cliente GetById(int id)
         {
-            return await _context.Clientes.Include(c => c.Enderecos).FirstOrDefaultAsync(c => c.Id == id);
+            return _context.Clientes.Find(id);
         }
 
-        public async Task AddAsync(Cliente cliente)
+        public void Add(Cliente cliente)
         {
-            await _context.Clientes.AddAsync(cliente);
-            await _context.SaveChangesAsync();
+            _context.Clientes.Add(cliente);
+            _context.SaveChanges();
         }
 
-        public async Task UpdateAsync(Cliente cliente)
+        public void Update(Cliente cliente)
         {
             _context.Clientes.Update(cliente);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var cliente = await GetByIdAsync(id);
+            var cliente = _context.Clientes.Find(id);
             if (cliente != null)
             {
                 _context.Clientes.Remove(cliente);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using TesteBrPartners.Application.Interfaces;
+﻿using System.Collections.Generic;
+using TesteBrPartners.Application.Interfaces;
 using TesteBrPartners.Domain.Entities;
 
 namespace TesteBrPartners.Application.Services
@@ -12,29 +13,29 @@ namespace TesteBrPartners.Application.Services
             _clienteRepository = clienteRepository;
         }
 
-        public async Task<IEnumerable<Cliente>> GetAllClientesAsync()
+        public IEnumerable<Cliente> GetAllClientes()
         {
-            return await _clienteRepository.GetAllAsync();
+            return _clienteRepository.GetAll();
         }
 
-        public async Task<Cliente> GetClienteByIdAsync(int id)
+        public Cliente GetClienteById(int id)
         {
-            return await _clienteRepository.GetByIdAsync(id);
+            return _clienteRepository.GetById(id);
         }
 
-        public async Task AddClienteAsync(Cliente cliente)
+        public void CreateCliente(Cliente cliente)
         {
-            await _clienteRepository.AddAsync(cliente);
+            _clienteRepository.Add(cliente);
         }
 
-        public async Task UpdateClienteAsync(Cliente cliente)
+        public void UpdateCliente(Cliente cliente)
         {
-            await _clienteRepository.UpdateAsync(cliente);
+            _clienteRepository.Update(cliente);
         }
 
-        public async Task DeleteClienteAsync(int id)
+        public void DeleteCliente(int id)
         {
-            await _clienteRepository.DeleteAsync(id);
+            _clienteRepository.Delete(id);
         }
     }
 }

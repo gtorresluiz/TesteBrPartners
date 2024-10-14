@@ -1,14 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -19,8 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TesteBrPartners.Application\TesteBrPartners.Application.csproj" />
     <ProjectReference Include="..\TesteBrPartners.Domain\TesteBrPartners.Domain.csproj" />
-    <ProjectReference Include="..\TesteBrPartners.Infra\TesteBrPartners.Infra.csproj" />
-    <ProjectReference Include="..\TesteBrPartners.UI\TesteBrPartners.UI.csproj" />
   </ItemGroup>
 
 </Project>

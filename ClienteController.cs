@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using TesteBrPartners.Application.Services;
 using TesteBrPartners.Domain.Entities;
 
 namespace TesteBrPartners.UI.Controllers
 {
-    public class ClienteController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ClienteController : ControllerBase
     {
         private readonly ClienteService _clienteService;
 
@@ -13,69 +16,46 @@ namespace TesteBrPartners.UI.Controllers
             _clienteService = clienteService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public ActionResult<IEnumerable<Cliente>> GetAllClientes()
         {
-            var clientes = await _clienteService.GetAllClientesAsync();
-            return View(clientes);
+            return Ok(_clienteService.GetAllClientes());
         }
 
-        public IActionResult Create()
+        [HttpGet("{id}")]
+        public ActionResult<Cliente> GetClienteById(int id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Cliente cliente)
-        {
-            if (ModelState.IsValid)
-            {
-                await _clienteService.AddClienteAsync(cliente);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cliente);
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var cliente = await _clienteService.GetClienteByIdAsync(id);
+            var cliente = _clienteService.GetClienteById(id);
             if (cliente == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return Ok(cliente);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Cliente cliente)
+        public ActionResult CreateCliente(Cliente cliente)
+        {
+            _clienteService.CreateCliente(cliente);
+            return CreatedAtAction(nameof(GetClienteById), new { id = cliente.Id }, cliente);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCliente(int id, Cliente cliente)
         {
             if (id != cliente.Id)
             {
                 return BadRequest();
             }
-
-            if (ModelState.IsValid)
-            {
-                await _clienteService.UpdateClienteAsync(cliente);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cliente);
+            _clienteService.UpdateCliente(cliente);
+            return NoContent();
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCliente(int id)
         {
-            var cliente = await _clienteService.GetClienteByIdAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            return View(cliente);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _clienteService.DeleteClienteAsync(id);
-            return RedirectToAction(nameof(Index));
+            _clienteService.DeleteCliente(id);
+            return NoContent();
         }
     }
 }

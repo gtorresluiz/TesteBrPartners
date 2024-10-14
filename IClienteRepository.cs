@@ -1,13 +1,14 @@
-﻿using TesteBrPartners.Domain.Entities;
+﻿using System.Collections.Generic;
+using TesteBrPartners.Domain.Entities;
 
 namespace TesteBrPartners.Application.Interfaces
 {
     public interface IClienteRepository
     {
-        Task<IEnumerable<Cliente>> GetAllAsync();
-        Task<Cliente> GetByIdAsync(int id);
-        Task AddAsync(Cliente cliente);
-        Task UpdateAsync(Cliente cliente);
-        Task DeleteAsync(int id);
+        IEnumerable<Cliente> GetAll();
+        Cliente GetById(int id);
+        void Add(Cliente cliente);
+        void Update(Cliente cliente);
+        void Delete(int id);
     }
 }
