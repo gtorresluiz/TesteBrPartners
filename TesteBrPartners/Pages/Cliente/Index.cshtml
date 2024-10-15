@@ -1,0 +1,34 @@
+﻿@model List<Cliente>
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h2>Lista de Clientes</h2>
+
+@Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridClientes";
+        settings.KeyFieldName = "Id"; // Nome do campo chave primária (Id)
+        settings.DataSource = Model; // Fonte de dados (lista de clientes)
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Nome"; // Nome do campo "Nome"
+            column.Caption = "Nome"; // Título da coluna
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Email"; // Nome do campo "Email"
+            column.Caption = "Email"; // Título da coluna
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Telefone"; // Nome do campo "Telefone"
+            column.Caption = "Telefone"; // Título da coluna
+        });
+
+    }).Bind(Model).GetHtml()
+
+<a asp-action="Create">Adicionar Novo Cliente</a>
