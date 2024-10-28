@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TesteBrPartners.Application.Interfaces;
-using TesteBrPartners.Domain.Entities;
+using TesteBrPartners.Domain.Models;
 using TesteBrPartners.Infra.Data;
 
 namespace TesteBrPartners.Infra.Repositories

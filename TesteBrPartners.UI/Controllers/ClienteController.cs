@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TesteBrPartners.Application.Interfaces;
-using TesteBrPartners.Domain.Entities;
+using TesteBrPartners.Domain.Models;
 
 namespace TesteBrPartners.UI.Controllers
 {

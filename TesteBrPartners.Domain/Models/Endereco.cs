@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TesteBrPartners.Domain.Entities
+namespace TesteBrPartners.Domain.Models
 {
     public class Endereco
     {

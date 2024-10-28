@@ -1,4 +1,4 @@
-﻿namespace TesteBrPartners.Domain.Entities
+﻿namespace TesteBrPartners.Domain.Models
 {
     public class Cliente
     {

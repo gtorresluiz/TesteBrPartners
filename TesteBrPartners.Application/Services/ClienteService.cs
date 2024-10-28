@@ -1,5 +1,5 @@
 ﻿using TesteBrPartners.Application.Interfaces;
-using TesteBrPartners.Domain.Entities;
+using TesteBrPartners.Domain.Models;
 
 namespace TesteBrPartners.Application.Services
 {

@@ -1,11 +1,14 @@
-﻿@model List<Cliente>
+﻿@page
+@model List<TesteBrPartners.Domain.Models.Cliente>
+@using DevExpress.AspNetCore
+
 @{
     ViewData["Title"] = "Clientes";
 }
 
 <h2>Lista de Clientes</h2>
 
-@Html.DevExpress().GridView(settings =>
+@Html.DevExpress().(settings =>
     {
         settings.Name = "gridClientes";
         settings.KeyFieldName = "Id"; // Nome do campo chave primária (Id)
@@ -23,12 +26,6 @@
             column.Caption = "Email"; // Título da coluna
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Telefone"; // Nome do campo "Telefone"
-            column.Caption = "Telefone"; // Título da coluna
-        });
-
     }).Bind(Model).GetHtml()
 
-<a asp-action="Create">Adicionar Novo Cliente</a>
+<a asp-action="Create" class="btn btn-success">Adicionar Novo Cliente</a>

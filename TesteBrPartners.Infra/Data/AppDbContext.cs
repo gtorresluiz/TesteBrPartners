@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TesteBrPartners.Domain.Entities;
+using TesteBrPartners.Domain.Models;
 
 namespace TesteBrPartners.Infra.Data
 {
